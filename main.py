@@ -109,7 +109,8 @@ def home():
             continue
         colors.append("rgb("+str(item)+",0,0)")
     
-        
+    print(staes)
+    print(totalConfirmed)    
 
     return render_template("index.html",state = staes,confirm = totalConfirmed, lat = latitude,lang = longitude,colors = colors,len = len(confirmedCasesForegin))
 

@@ -36,7 +36,8 @@
         z-index: 10;
     }
     .info table{
-        height: 100vh;
+        position: absolute;
+        height: 100%;
     }
     .info td{
         padding-left: 20px;
@@ -51,7 +52,7 @@
 <body>
     <div id='map'></div>
     <div class="info">
-        <table>
+        <table style="background-color: rgba(255,255,255,0.8)">
             <tr>
                 <th>State</th>
                 <th>Confirmed Cases</th>
@@ -78,10 +79,7 @@
         });
         {% for i in range(0,len) %}
         new mapboxgl.Marker({
-                color: "{{ colors[i]|safe }}",
-                text: "asdf",
-                title: "qwer"
-
+                color: "{{ colors[i]|safe }}"
             }).setLngLat([
         {{ lang[i] }}, 
         {{ lat[i] }}])
