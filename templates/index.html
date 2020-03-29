@@ -19,16 +19,53 @@
     * {
         padding: 0;
         margin: 0;
+        font-family: 'Roboto', sans-serif;
+
     }
     
     #map {
-        width: 100vw;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    .info{
+        position: absolute;
         height: 100vh;
+        background-color: rgba(255,255,255,0.8);
+        color: #000000;
+        z-index: 10;
+    }
+    .info table{
+        height: 100vh;
+    }
+    .info td{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .info th{
+        padding-left: 20px;
+        padding-right: 20px;
     }
 </style>
 
 <body>
     <div id='map'></div>
+    <div class="info">
+        <table>
+            <tr>
+                <th>State</th>
+                <th>Confirmed Cases</th>
+                
+            </tr>
+            {% for i in range(0,len) %}
+                <tr>
+                    <td>{{ state[i]|safe }}</td>
+                        <td>{{ confirm[i]|safe }}</td>
+                        </tr>
+            {%endfor%}
+            </table>
+
+        </div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY29kZS15YXJkIiwiYSI6ImNrOGI0bGNuNDA0enEzbm1tamVvZW04cnkifQ.KIu0J7WeDnyFCa_wFUW1XA';
         var map = new mapboxgl.Map({
@@ -41,7 +78,9 @@
         });
         {% for i in range(0,len) %}
         new mapboxgl.Marker({
-                color: "{{ colors[i]|safe }}"
+                color: "{{ colors[i]|safe }}",
+                text: "asdf",
+                title: "qwer"
 
             }).setLngLat([
         {{ lang[i] }}, 

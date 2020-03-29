@@ -50,7 +50,7 @@ def home():
                  'Maharashtra', 'Tripura', 'Karnataka', 'Kerala', 'Uttar Pradesh',
                  'Assam', 'West Bengal', 'Gujarat', 'Odisha', 'Rajasthan', 'Himachal Pradesh',
                  'Andaman and Nicobar Islands', 'Andhra Pradesh', 'Bihar', 'Chandigarh',
-                 'Delhi', 'Goa', 'Ladakh', 'Manipur', 'Mizoram', 'Punjab', 'Puducherry', 'Uttarakhand']
+                 'Delhi', 'Goa', 'Ladakh', 'Manipur', 'Mizoram', 'Punjab', 'Puducherry', 'Uttarakhand','Jammu and Kashmir']
 
 
     stateLatLong = [[11.059821,	78.387451],
@@ -78,16 +78,18 @@ def home():
                 [34.152588, 77.577049],
                 [24.6637, 93.9063],
                 [23.1645, 92.9376],
-                [31.1471, 75.3412], [11.9416, 79.8083], [30.0668, 79.0193]]
+                [31.1471, 75.3412], [11.9416, 79.8083], [30.0668, 79.0193],[34.083656,74.797371]]
     
     latitude =[]
     longitude=[]
+    staes = []
 
     for state in statesList:
         if state in statesListLat:
             index = statesListLat.index(state)
             latitude.append(stateLatLong[index][0])
             longitude.append(stateLatLong[index][1])
+            staes.append(state)
     
     colors = []
 
@@ -98,21 +100,22 @@ def home():
     for item in confirmedCasesIndia:
         val = 0
         index = confirmedCasesIndia.index(item)
-        val = item+confirmedCasesForegin[index]
+        val = int(item)+int(confirmedCasesForegin[index])
         totalConfirmed.append(val)
 
     for item in totalConfirmed:
         if int(item) > 255:
             colors.append("rgb(255,0,0)")
             continue
-        colors.append("rgb("+item+",0,0)")
+        colors.append("rgb("+str(item)+",0,0)")
     
         
 
-    return render_template("index.html",lat = latitude,lang = longitude,colors = colors,len = len(confirmedCasesForegin))
+    return render_template("index.html",state = staes,confirm = totalConfirmed, lat = latitude,lang = longitude,colors = colors,len = len(confirmedCasesForegin))
 
 # home()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    serve(app,listen = "*:"+port)
+    # serve(app,listen = "*:"+port)
+    app.run()
