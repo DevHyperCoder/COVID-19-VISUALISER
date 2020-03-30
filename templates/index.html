@@ -47,6 +47,11 @@
         padding-left: 20px;
         padding-right: 20px;
     }
+    @media screen and (max-width: 800px) {
+        .info {
+            opacity: 0;
+        }
+      }
 </style>
 
 <body>
@@ -69,6 +74,8 @@
         </div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY29kZS15YXJkIiwiYSI6ImNrOGI0bGNuNDA0enEzbm1tamVvZW04cnkifQ.KIu0J7WeDnyFCa_wFUW1XA';
+        const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        if(vw>800){
         var map = new mapboxgl.Map({
             container: 'map',
             zoom: 4,
@@ -77,6 +84,17 @@
             draggable: false,
             style: 'mapbox://styles/mapbox/streets-v11'
         });
+        }
+        else{
+           var map = new mapboxgl.Map({
+            container: 'map',
+            zoom: 3.7,
+            minZoom: 3.3,
+            center: [78, 21],
+            draggable: false,
+            style: 'mapbox://styles/mapbox/streets-v11'
+        }); 
+        }
         {% for i in range(0,len) %}
         new mapboxgl.Marker({
                 color: "{{ colors[i]|safe }}"
