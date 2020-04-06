@@ -32,8 +32,8 @@ def home():
                             statesList.append(td.getText())
                         if j is 2:
                             confirmedCasesIndia.append(td.getText())
-                        if j is 3:
-                            confirmedCasesForegin.append(td.getText())
+                        # if j is 3:
+                        #     confirmedCasesForegin.append(td.getText())
                         j = j+1
                         continue
                     j=1
@@ -42,15 +42,27 @@ def home():
         # print(statesList)  
         statesList.pop(len(statesList)-1)
         confirmedCasesIndia.pop(len(confirmedCasesIndia)-1)
-        confirmedCasesForegin.pop(len(confirmedCasesForegin)-1)
+        # confirmedCasesForegin.pop(len(confirmedCasesForegin)-1)
         # print(confirmedCasesIndia)
 
-        statesListLat = ['Tamil Nadu', 'Telengana',
-                 'Madhya Pradesh', 'Haryana', 'Chhattisgarh',
-                 'Maharashtra', 'Tripura', 'Karnataka', 'Kerala', 'Uttar Pradesh',
-                 'Assam', 'West Bengal', 'Gujarat', 'Odisha', 'Rajasthan', 'Himachal Pradesh',
-                 'Andaman and Nicobar Islands', 'Andhra Pradesh', 'Bihar', 'Chandigarh',
-                 'Delhi', 'Goa', 'Ladakh', 'Manipur', 'Mizoram', 'Punjab', 'Puducherry', 'Uttarakhand','Jammu and Kashmir']
+        statesListLat = ['Tamil Nadu',
+         'Telengana',
+
+                 'Madhya Pradesh',
+                  'Haryana',
+                   'Chhattisgarh',
+
+                 'Maharashtra',
+                  'Tripura', 'Karnataka',
+                   'Kerala', 'Uttar Pradesh',
+                 'Assam', 'West Bengal',
+                  'Gujarat', 'Odisha', 'Rajasthan',
+                   'Himachal Pradesh',
+                 'Andaman and Nicobar Islands',
+                  'Andhra Pradesh', 'Bihar', 'Chandigarh',
+                 'Delhi', 'Goa', 'Ladakh', 'Manipur', 
+                 'Mizoram', 'Punjab', 'Puducherry', 'Uttarakhand',
+                 'Jammu and Kashmir','Jharkhand','Arunachal Pradesh']
 
 
     stateLatLong = [[11.059821,	78.387451],
@@ -79,7 +91,7 @@ def home():
                 [24.6637, 93.9063],
                 [23.1645, 92.9376],
                 [31.1471, 75.3412], 
-                [11.9416, 79.8083], [30.0668, 79.0193],[34.083656,74.797371]]
+                [11.9416, 79.8083], [30.0668, 79.0193],[34.083656,74.797371],[23,85],[26,91]]
     
     latitude =[]
     longitude=[]
@@ -94,26 +106,26 @@ def home():
     
     colors = []
 
-    totalConfirmed = []
+    # totalConfirmed = []
     
 
 
-    for item in confirmedCasesIndia:
-        val = 0
-        index = confirmedCasesIndia.index(item)
-        val = int(item)+int(confirmedCasesForegin[index])
-        totalConfirmed.append(val)
+    # for item in confirmedCasesIndia:
+    #     val = 0
+    #     index = confirmedCasesIndia.index(item)
+    #     val = int(item)+int(confirmedCasesForegin[index])
+    #     totalConfirmed.append(val)
 
-    for item in totalConfirmed:
+    for item in confirmedCasesIndia:
         if int(item) > 255:
             colors.append("rgb(255,0,0)")
             continue
         colors.append("rgb("+str(item)+",0,0)")
     
     print(staes)
-    print(totalConfirmed)    
+    # print(totalConfirmed)    
 
-    return render_template("index.html",state = staes,confirm = totalConfirmed, lat = latitude,lang = longitude,colors = colors,len = len(confirmedCasesForegin))
+    return render_template("index.html",state = staes,confirm = confirmedCasesIndia, lat = latitude,lang = longitude,colors = colors,len = len(confirmedCasesIndia))
 
 # home()
 
